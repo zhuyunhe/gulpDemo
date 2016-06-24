@@ -21,3 +21,5 @@ gulp.watch('3.5/js/*.js',['modifyJS']);
 gulp.watch('3.5/js/*.js', function(){
 	console.log('modify JS');
 });
+
+gulp.task();
