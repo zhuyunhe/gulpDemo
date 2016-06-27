@@ -1,0 +1,508 @@
+
+
+/*basic reset*/
+* {
+	margin: 0;
+	padding: 0;}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	max-width: 600px;
+	margin: auto;
+	font-family: "微软雅黑", Helvetica, Arial, sans-serif;
+	background-color: #f2f2f2;
+	color: #343434;
+}
+a,a:focus,a:hover,a:active,a:visited{
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+.title{
+	position: relative;
+	width: 100%;
+	text-align: center;
+	color: #ffc000;
+	/*background = gradient + image pattern combo*/
+	/*background: linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)), url('/static/images/index/gs.png');*/
+	background-image: url(../image/spring.png);
+	background-repeat: no-repeat;
+	background-position: bottom;
+	background-size: 100% 100%;
+	padding-bottom: 10px;
+	text-shadow:0 1px 0px #fff;
+}
+#canvas{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.sign,.coinRule{
+	
+}
+.sign{
+	float: left;
+	margin-top: 15px;
+	margin-left: 10px;
+}
+.coinRule{
+	float: right;
+	margin: 10px 10px 0; 
+	padding: 5px;
+	font-size: .8em;
+	border: solid 2px #ffc000;
+	border-radius: 4px;
+	background-color: #fff;
+}
+
+.advance{
+	display: none;
+}
+.login{
+	display: none;
+	width: 60%;
+	color: #ffc000;
+	margin: 10px auto;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+#signedDay{
+	font-size: 4.5em;
+}
+
+.titleFoot {
+	text-align: center;
+	margin-top: 30px;
+	border-top: 1px solid #fff;
+}
+
+.titleFoot > p {
+	display: inline-block;
+	width: 50%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#coins{
+	position: relative;
+	padding-left: 2%;
+	padding-right: 2%;
+	background-color: #fff;
+	z-index: -2;
+}
+.myCoin{
+	float: left;
+	width: 17%;
+	text-align: center;
+	margin-top: 5px;
+}
+.myCoin>span{
+	color: #ff393a;
+}
+.myCoin>img{
+	width: 50px;
+}
+#coinNum{
+	color: #fc0;
+	text-align: center;
+}
+/*
+以下是进度条样式
+*/
+#progressbar {
+	float: right;
+	width: 80%;
+	z-index: 2;
+	overflow: hidden;
+	margin-top: 15px;
+	/*CSS counters to number the steps*/
+	counter-reset: step 5;
+	text-align: center;
+}
+#progressbar li {
+	position: relative;
+	float: left;
+	width: 14%;
+	text-transform: uppercase;
+	list-style-type: none;
+	color: #b5a58a;
+	font-size: .8em;
+}
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step 5;
+	width: 25px;
+	line-height: 25px;
+	display: block;
+	font-size: 12px;
+	color: #b5a58a;
+	background: #d8cbba;
+	border-radius: 13px;
+	margin: 0 auto 5px auto;
+}
+#progressbar li:nth-child(6):before{
+	content: counter(step);
+	counter-increment: step 0;
+}
+
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 4px;
+	background: #d8cbba;
+	position: absolute;
+	left: -50%;
+	top: 13px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #ffcc00;
+	color: #fff;
+}
+#progressbar li.active{
+	color: #e89105;
+}
+/*
+进度条样式结束
+*/
+.clearfix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+/*
+活动和赚金币任务样式开始
+*/
+.actAndTask{
+	position: relative;
+	height: 130px;
+	width: 98%;
+	margin: 5px 0;
+	padding: 0 0 0 1%;
+	background-color: #fff;
+}
+.activity{
+	position: absolute;
+	top: 0;
+	left: 1%;
+	width: 54%;
+	height: 130px;
+}
+.activity>header{
+	line-height: 25px;
+	margin-top: 5px;
+}
+.activityImg{
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	background-image: url(/static/images/activity/38.png);
+	background-size: 98%;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.getCoin{
+	position: absolute;
+	top: 0;
+	left: 55%;
+	height: 65px;
+	width: 45%;
+	border-left: 1px solid #d0d0d0;
+	border-bottom: 1px solid #d0d0d0;
+}
+.getCoin>img{
+	float: left;
+	width: 45px;
+	margin: 10px 0 10px 5px;
+	border-radius: 25px;
+}
+.getInvitation{
+	position: absolute;
+	top: 65px;
+	left: 55%;
+	height: 65px;
+	width: 45%;
+	border-left: 1px solid #d0d0d0;
+}
+.getInvitation>img{
+	float: left;
+	width: 45px;
+	margin: 10px 0 10px 5px;
+	border-radius: 25px;
+}
+.getCoinDes,.getInvitationDes{
+	float: left;
+	margin-left: 5px;
+}
+.getCoinDes p:nth-of-type(1),.getInvitation p:nth-of-type(1){
+	line-height: 30px;
+	margin-top: 5px;
+}
+.getCoinDes p:nth-of-type(1){
+	color: #6b95e6;
+}
+.getInvitationDes p:nth-of-type(1){
+	color: #13b8a3;
+}
+.getCoinDes p:nth-of-type(2),.getInvitationDes p:nth-of-type(2){
+	color:#b5a58a;
+	/*line-height: 25px;*/
+	font-size: .6em;
+}
+
+.activity>img{
+	width: 100%;
+}
+.coinParadise{
+	float: right;
+	position: relative;
+	width: 40%;
+}
+
+/*
+活动和赚金币任务样式开始
+*/
+.market{
+	display: none;
+	width: 96%;
+	margin: 0 auto;
+}
+
+header{
+	/*border-left: 5px solid #f75449;*/
+	line-height: 25px;
+    padding-left: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+header>img{
+	float: left;
+	height: 25px;
+	margin-right: 5px;
+}
+.coinPrize{
+	width: 98%;
+    margin: 15px auto 0;
+}
+.num{
+	background-color: #fff;
+	text-align: center;
+	position: relative;
+	height: 125px;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.image{
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+.image > img{
+	max-width: 100%;
+	height: 100%;
+}
+.prizeInfo{
+	position: relative;
+	float: right;
+	width: 50%;
+	height: 100%;
+}
+
+.prizeName{
+	font-size: 1.2em;
+	font-weight: bold;
+	text-align: left;
+	padding: 5px;
+}
+.prizeCoin{
+	float: left;
+	font-size: .8em;
+	color: #ff393a;
+	text-align: left;
+	padding: 5px;
+}
+.myOrder,.intoMarket{
+	float:right;
+	width: 90px;
+	color: #0dc67a;
+	text-align: center; 
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+}
+.stock{
+	float: left;
+	font-size: .8em;
+	color: #ff393a;
+	margin: 0 0 0 10px;
+	text-align: left;
+	padding: 5px;
+}
+.getPrize{
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	background-color: #0dc67a;
+	color: #fff;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-left: 5px;
+	font-size: .8em;
+}
+footer{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: .8em;
+}
+.company{
+	margin-top: 10px;
+	color: #ff393a;
+}
+
+.cat{
+	display: none;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+}
+
+.addCoin{
+	position: absolute;
+	width: 40%;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	margin : 30% 0 0 30%;
+}
+.addCoin>img{
+	width: 100%;
+}
+p#catCoin {
+    text-align: center;
+    font-size: 1.8em;
+    color: #ff393a;
+}
+
+.bg {
+	background-color: #666;
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	display: none;
+	width: 100%;
+	height: 100%;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	opacity:0.5;
+}
+
+/*
+签到页教育商城样式
+*/
+#productList{
+	position: relative;
+	min-height: 70px;
+}
+.todayProduct{
+	position: relative;
+	float: left;
+	width: 32%;
+	margin-left: 1%;
+	background-color: #fff;
+}
+.todayProduct>a{
+	display: block;
+}
+.productImg>img{
+	width: 100%;
+	min-height: 60px;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	vertical-align: bottom;
+}
+.countPanel{
+	position: absolute;
+	left: 0;
+	top: 0;
+	line-height: 18px;
+	padding: 0 5px;
+	border-radius: 0 30px 30px 0;
+	background-color: rgba(0,0,0,0.3);
+	font-size: .6em;
+	color: #fff;
+}
+.clock{
+	position: relative;
+	top: 2px;
+	height: 15px;
+}
+.countdown{
+	margin-left: 5px;
+}
+.productIntro{
+    padding: 5px;
+    color: #343434;
+	background-color: #fff;
+}
+.productDetail{
+	background-color: #fff;
+}
+.price{
+	float: left;
+	font-size: .8em;
+	margin: 0 10px;
+	color: #f00;
+}
+.oldPrice{
+	float: left;
+	font-size: .6em;
+	line-height: 21px;
+	text-decoration: line-through;
+	color: #aaa;
+}
+.hotBuyer{
+	text-align: center;
+	color: #aaa;
+	font-size: .8em;
+}
+.hotBuyer>span{
+	color: #ff0000;
+}
+.productTitle{
+	display: none;
+	font-size: .8em;
+	text-align: center;
+	word-break:break-all;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.titleFoot,.getInvitation{
+	display: none;
+}
+.hotSell img{
+    width: 100%;
+}
