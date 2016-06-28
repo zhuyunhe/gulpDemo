@@ -4,3 +4,10 @@
 # Node
 node_modules
 npm-debug.log
+
+dist/js
+dist/css
+dist/image
+dist/*.htm
+dist/*.html
+

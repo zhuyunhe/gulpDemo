@@ -57,7 +57,7 @@ a,a:focus,a:hover,a:active,a:visited{
 	margin: 10px 10px 0; 
 	padding: 5px;
 	font-size: .8em;
-	border: solid 2px #ffc000;
+	border: solid 2px red;
 	border-radius: 4px;
 	background-color: #fff;
 }

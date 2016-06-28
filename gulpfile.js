@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var size = require('gulp-size');
 var browserSync = require('browser-sync').create();
+var rev = require('gulp-rev');
 
 gulp.task('default',function(){
 	return console.log('hello gulp');
@@ -38,7 +39,11 @@ gulp.task('js',function(){
 		.pipe(gulp.dest(dest))
 		.pipe(rename({suffix:'.min'}))
 		.pipe(uglify())
+		.pipe(gulp.dest(dest))
+		.pipe(rev())
 		.pipe(size())
+		.pipe(gulp.dest(dest))
+		.pipe(rev.manifest())
 		.pipe(gulp.dest(dest));
 });
 
@@ -53,7 +58,12 @@ gulp.task('css',function(){
 		.pipe(rename({suffix:'.min'}))
 		.pipe(cleancss())
 		.pipe(size())
+		.pipe(gulp.dest(dest))
+		.pipe(rev())
+		.pipe(gulp.dest(dest))
+		.pipe(rev.manifest())
 		.pipe(gulp.dest(dest));
+
 });
 
 //图片处理
@@ -74,4 +84,6 @@ gulp.task('browser-sync',function(){
 		}
 	});
 	gulp.watch('./src/*.htm').on('change',browserSync.reload);
+	gulp.watch('./src/js/*.js').on('change',browserSync.reload);
+	gulp.watch('./src/less/*').on('change',browserSync.reload);
 });

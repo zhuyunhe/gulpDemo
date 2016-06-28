@@ -2,9 +2,10 @@ var timeInterval;	//计时器
 var startTime;		//抢购开始时间
 var endTime;		//抢购结束时间
 var tag;			//区分新老版的标志位，加了微信支付的2.12版tag=1
+var uid = '';
 $(function(){
+	console.log('text gulp reload');
 	var args = getSearch();	//获取url中的查询参数
-	issigned = localStorage.setItem('issigned',issigned);
 	var phoneId = args.phoneId;	//得到手机机器码
 	localStorage.setItem('phoneId',phoneId);
 
