@@ -7,6 +7,7 @@ var jshint = require('gulp-jshint');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var size = require('gulp-size');
+var browserSync = require('browser-sync').create();
 
 gulp.task('default',function(){
 	return console.log('hello gulp');
@@ -17,11 +18,13 @@ gulp.task('html',function(){
 	var src = './src/*.htm';
 	var dest = './dist/';
 
-	gulp.src(src)
+	return gulp.src(src)
 		.pipe(htmlmin({collapseWhitespace:true}))
 		.pipe(size())
 		.pipe(gulp.dest(dest));
 });
+
+gulp.task('html-watch', ['html'], browserSync.reload);
 
 //js处理
 gulp.task('js',function(){
@@ -61,4 +64,14 @@ gulp.task('images',function(){
 		.pipe(imagemin())
 		.pipe(size())
 		.pipe(gulp.dest(dest))
-})
+});
+
+//browserSync
+gulp.task('browser-sync',function(){
+	browserSync.init({
+		server:{
+			baseDir: "./"
+		}
+	});
+	gulp.watch('./src/*.htm').on('change',browserSync.reload);
+});
