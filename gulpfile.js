@@ -9,6 +9,8 @@ var uglify = require('gulp-uglify');
 var size = require('gulp-size');
 var browserSync = require('browser-sync').create();
 var rev = require('gulp-rev');
+var sourcemaps = require('gulp-sourcemaps');
+
 
 gulp.task('default',function(){
 	return console.log('hello gulp');
@@ -35,13 +37,15 @@ gulp.task('js',function(){
 	gulp.src(src)
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
-		.pipe(concat('main.js'))
-		.pipe(gulp.dest(dest))
-		.pipe(rename({suffix:'.min'}))
-		.pipe(uglify())
-		.pipe(gulp.dest(dest))
-		.pipe(rev())
-		.pipe(size())
+		.pipe(sourcemaps.init())
+			.pipe(concat('main.js'))
+			.pipe(gulp.dest(dest))
+			.pipe(rename({suffix:'.min'}))
+			.pipe(uglify())
+			.pipe(gulp.dest(dest))
+			.pipe(rev())
+			.pipe(size())
+		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(dest))
 		.pipe(rev.manifest())
 		.pipe(gulp.dest(dest));

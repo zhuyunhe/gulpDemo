@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+	</head>
+	<body>
+		<section>
+			<button id="btn">make a promise</button>
+			<div id="log"></div>
+		</section>
+		<section>
+			<button id="btn_cb">make a callback</button>
+			<div id="log_cb"></div>
+		</section>
+	</body>
+	<script>
+		'use strict'
+		var count = 0;
+		
+		function testPromise(){
+			var thisCount = ++count;
+			var log = document.getElementById('log');
+			log.insertAdjacentHTML('beforeend','('+thisCount+')Started (<small>Sync code started</small>)<br/>');
+			var p = new Promise(
+				function(resolve, reject){
+					log.insertAdjacentHTML('beforeend','('+thisCount+')Started (<small>Async code started</small>)<br/>');
+					//用定时器模拟一个耗时的异步任务
+					window.setTimeout(
+						function(){
+							resolve(thisCount);
+						},Math.random()*2000 + 1000);
+			});
+			p.then(
+				function(val){
+					log.insertAdjacentHTML('beforeend', '('+val+')Started (<small>Async code terminated</small>)<br/>');
+				}
+				)
+			 .catch(
+			 	function(reason){
+			 		console.log('Handle rejected promise ('+reason+') here')
+			 	}
+			 	);
+
+			log.insertAdjacentHTML('beforeend', '('+thisCount+')Started (<small>Sync code terminated</small>)<br/>');
+		}
+		if('Promise' in window){
+			var btn = document.getElementById('btn');
+			btn.addEventListener('click', testPromise);
+		}
+		var btn_cb = document.getElementById('btn_cb');
+		btn_cb.addEventListener('click', function(){
+			testCallback(callback);
+		});
+		var log_cb = document.getElementById('log_cb');
+		function testCallback(callback){
+			var thisCount = ++count;
+			log_cb.insertAdjacentHTML('beforeend','('+thisCount+')Started (<small>Sync code started</small>)<br/>');
+
+			//模拟一个异步操作			
+			log_cb.insertAdjacentHTML('beforeend','('+thisCount+')Started (<small>Async code started</small>)<br/>');
+			setTimeout(function(){
+				//执行异步操作回调
+				callback(thisCount);
+			},Math.random()*2000 + 1000);
+
+			log_cb.insertAdjacentHTML('beforeend','('+thisCount+')Started (<small>Sync code terminated</small>)<br/>');
+		}
+		function callback(val){
+			log_cb.insertAdjacentHTML('beforeend','('+val+')Started (<small>Async code terminated</small>)<br/>');
+		}
+	</script>
+</html>

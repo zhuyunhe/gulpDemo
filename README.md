@@ -46,6 +46,7 @@ Gulp是基于Node.js的自动任务运行器。
 1. 重命名文件：[gulp-rename](https://www.npmjs.com/package/gulp-rename/)
 2. 合并文件：[gulp-concat](https://www.npmjs.com/package/gulp-concat/)
 3. 静态资源文件版本控制：[gulp-rev](https://github.com/sindresorhus/gulp-rev)
+4. SourceMap：[gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps)
 
 ### 浏览器
 1. 浏览器自动刷新：[browsersync](https://www.browsersync.io/),该插件的[中文网站](http://www.browsersync.cn/)。
